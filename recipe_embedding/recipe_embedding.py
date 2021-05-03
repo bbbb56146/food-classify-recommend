@@ -5,7 +5,7 @@ import csv
 import os
 
 recipe_sentences = [] # csv파일로 부터 읽어온 documents 저장
-direction = 'recipe_data/'
+direction = '../recipe_data/'
 recipe_folder = os.listdir(direction) # recipe_data폴더에 들어있는 파일(폴더) 목록 list
 for i, folder in enumerate(recipe_folder):
     csv_filepath = os.listdir(direction + folder) # 해당 폴더에 들어있는 csv파일 목록 list

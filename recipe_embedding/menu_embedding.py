@@ -60,6 +60,7 @@ def get_menu2vec(loaded_wv):
       fi = open(direction + folder + '/' + csv_file, 'rt', encoding='UTF8')
       rdr = csv.reader(fi)
       # recipe_idx = 0
+      recipe_vec = [0 for i in range(100)]  # 100 : wv size
       for k, row in enumerate(rdr):
         if k == 0:
           menu_name = row[0]  # 메뉴 이름
@@ -67,14 +68,14 @@ def get_menu2vec(loaded_wv):
           continue
         elif k % 2 == 0:
           # 레시피별 벡터 계산(wv 활용)
-          # 일단 가장 추천이 많은 첫번째 레시피만 사용
+          # 모든 레시피 평균 구하기
           # recipe_idx+=1 # 레시피 인덱스 증가
-          recipe_vec = [0 for i in range(100)]  # 100 : wv size
+          tmp_vec = [0 for i in range(100)]  # 100 : wv size
           for l, ingredient in enumerate(row):
-            recipe_vec = [(recipe_vec[i] + loaded_wv[ingredient][i]) / len(row) for i in range(100)]
-          menu_dict[menu_name] = recipe_vec
-          menu2vec.add_vector(menu_name, recipe_vec)
-          break
+            tmp_vec = [(recipe_vec[i] + loaded_wv[ingredient][i]) / len(row) for i in range(100)]
+          recipe_vec = [(recipe_vec[i]*((k/2)-1) + tmp_vec[i]) / (k/2) for i in range(100)]
+          #menu_dict[menu_name] = recipe_vec
+      menu2vec.add_vector(menu_name, recipe_vec)
       fi.close()
 
   print("length of menu2vec: %i" %(len(menu_dict)))

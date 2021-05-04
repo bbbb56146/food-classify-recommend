@@ -80,3 +80,9 @@ def get_menu2vec(loaded_wv):
 
   print("length of menu2vec: %i" %(len(menu_dict)))
   return menu2vec
+
+def save_menu2vec(menu2vec, filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
+  menu2vec.save(filepath + filename)
+
+def load_menu2vec(filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
+  return KeyedVectors.load(filepath + filename)

@@ -10,7 +10,10 @@ from recipe_embedding import menu_embedding
 model_ingredient_loaded = FastText.load('./recipe_embedding/_model_ingredient') #모델 로드
 wv_ingredient_loaded = KeyedVectors.load('./recipe_embedding/_model_ingredient_wv') #wv 로드
 
-menu2vec = menu_embedding.get_menu2vec(wv_ingredient_loaded)
+if '_menu2vec_wv' not in os.listdir('./recipe_embedding/'):
+  menu2vec = menu_embedding.get_menu2vec(wv_ingredient_loaded)
+  menu_embedding.save_menu2vec(menu2vec)
+menu2vec = menu_embedding.load_menu2vec()
 print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
 
 food_freq = {} # Food Classifier에서 분류 결과로서 생성한 dictionory라고 가정함

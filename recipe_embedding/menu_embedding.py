@@ -46,10 +46,12 @@ for i, folder in enumerate(recipe_folder):  #폴더 속 탐색
 """
 
 def get_menu2vec(loaded_wv):
+  menu2vec = KeyedVectors(vector_size=100)
+
   menu_name = ""  # 메뉴명 문자열
   menu_dict = {}  # 메뉴 딕셔너리
   # int recipe_tot #csv 파일 속 레시피 수
-  direction = '../recipe_data/'
+  direction = './recipe_data/'
   print(os.listdir(direction))
   recipe_folder = os.listdir(direction)
   for i, folder in enumerate(recipe_folder):  # 폴더 속 탐색
@@ -71,7 +73,9 @@ def get_menu2vec(loaded_wv):
           for l, ingredient in enumerate(row):
             recipe_vec = [(recipe_vec[i] + loaded_wv[ingredient][i]) / len(row) for i in range(100)]
           menu_dict[menu_name] = recipe_vec
+          menu2vec.add_vector(menu_name, recipe_vec)
           break
       fi.close()
 
-  print(len(menu_dict))
+  print("length of menu2vec: %i" %(len(menu_dict)))
+  return menu2vec

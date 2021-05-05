@@ -46,7 +46,7 @@ for i, folder in enumerate(recipe_folder):  #폴더 속 탐색
 """
 
 def get_menu2vec(loaded_wv):
-  menu2vec = KeyedVectors(vector_size=100)
+  menu2vec = KeyedVectors(vector_size=100) # menu embedding 결과를 저장
 
   menu_name = ""  # 메뉴명 문자열
   menu_dict = {}  # 메뉴 딕셔너리

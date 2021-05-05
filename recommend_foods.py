@@ -33,3 +33,16 @@ for food in food_freq:
 for menu, sim in food_sim.items():
   print(menu, end=' -> ')
   print(sim)
+print('\n')
+
+food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개수 만큼, similarity>0.5인 음식 선택)
+for food, freq in food_freq.items():
+  for i, food_sim_tuple in enumerate(food_sim.get(food)):
+    if i >= freq:
+      break
+    elif food_sim_tuple[1] > 0.5:
+      food_recommend.append(food_sim_tuple[0])
+
+print(food_recommend)
+
+

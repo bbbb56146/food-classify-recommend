@@ -28,19 +28,19 @@ for food in food_freq:
   if food not in menu2vec.index_to_key:
     food_sim[food] = []
   else:
-    food_sim[food] = menu2vec.most_similar(positive=[food], topn=20)
+    food_sim[food] = menu2vec.most_similar(positive=[food], topn=10)
 
 for menu, sim in food_sim.items():
   print(menu, end=' -> ')
   print(sim)
 print('\n')
 
-food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개수 만큼, similarity>0.5인 음식 선택)
+food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개수 만큼, similarity>0.97인 음식 선택)
 for food, freq in food_freq.items():
   for i, food_sim_tuple in enumerate(food_sim.get(food)):
     if i >= freq:
       break
-    elif food_sim_tuple[1] > 0.5:
+    elif food_sim_tuple[1] > 0.97:
       food_recommend.append(food_sim_tuple[0])
 
 print(food_recommend)

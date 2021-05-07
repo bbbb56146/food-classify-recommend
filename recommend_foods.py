@@ -47,7 +47,7 @@ for food, freq in food_freq.items():
 
 print(food_recommend)
 
-food_rec_json_object = {} #
+food_rec_json_object = {} # food_recommend의 각 food에 대해 KakaoLocalAPI에 검색한 음식점 정보 Dictionary
 rest_api_key = "8edafea22605fecd679938e8880fa6ee"
 for food in food_recommend:
   print(food)

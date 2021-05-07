@@ -5,7 +5,9 @@ import csv
 import os
 import numpy as np
 
+# import local files
 from recipe_embedding import menu_embedding
+import KakaoLocalApi
 
 model_ingredient_loaded = FastText.load('./recipe_embedding/_model_ingredient') #모델 로드
 wv_ingredient_loaded = KeyedVectors.load('./recipe_embedding/_model_ingredient_wv') #wv 로드
@@ -44,5 +46,13 @@ for food, freq in food_freq.items():
       food_recommend.append(food_sim_tuple[0])
 
 print(food_recommend)
+
+food_rec_json_object = {} #
+rest_api_key = "8edafea22605fecd679938e8880fa6ee"
+for food in food_recommend:
+  print(food)
+  food_rec_json_object[food] = KakaoLocalApi.local_api_keyword(rest_api_key=rest_api_key, keyword=food, size=5)
+
+print(food_rec_json_object['소불고기']['documents'][0])
 
 

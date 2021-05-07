@@ -2,10 +2,10 @@ import json
 import requests
 
 
-def local_api_keyword(rest_api_key, quary, size=10, page=1):
+def local_api_keyword(rest_api_key, keyword, size=10, page=1):
   headers = {"Authorization": "KakaoAK {}".format(rest_api_key)}
   url_keyword = "https://dapi.kakao.com/v2/local/search/keyword.json?"  # 키워드로 검색
-  params = {'query': quary}  # 검색할 quary
+  params = {'query': keyword}  # 검색할 quary
   params['x'] = '126.93927007202764'  # 중심좌표 (서강대학교의 x,y 좌표)
   params['y'] = '37.55123227549557'
   params['radius'] = '3000'  # (x,y)좌표의 반경 3000m 내에서 검색
@@ -16,7 +16,7 @@ def local_api_keyword(rest_api_key, quary, size=10, page=1):
   json_object = json.loads(req.text)
   return json_object
 
-
+"""
 rest_api_key = "8edafea22605fecd679938e8880fa6ee" #REST API key
 json_object = local_api_keyword(rest_api_key, '파스타', size=5)
 
@@ -28,3 +28,4 @@ for doc in json_object['documents']: # parameter 지정하여 출력
   print("카테고리: {}".format(doc['category_name']))
   print("주소: {}".format(doc['address_name']), end='\n----\n')
   break
+"""

@@ -82,8 +82,8 @@ def get_menu2vec(loaded_wv):
             tmp_vec = [tmp_vec[i]+(loaded_wv[ingredient][i] / len(row)) for i in range(100)]
           recipe_vec = [recipe_vec[i]+ (tmp_vec[i]*recipe_idx/recipe_sum) for i in range(100)]
           recipe_idx-=1
-      menu_dict[menu_name] = recipe_vec
-      #menu2vec.add_vector(menu_name, recipe_vec)
+      #menu_dict[menu_name] = recipe_vec
+      menu2vec.add_vector(menu_name, recipe_vec)
       fi.close()
 
   print("length of menu2vec: %i" %(len(menu_dict)))

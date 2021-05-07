@@ -9,10 +9,9 @@ import numpy as np
 from recipe_embedding import menu_embedding
 import KakaoLocalApi
 
-model_ingredient_loaded = FastText.load('./recipe_embedding/_model_ingredient') #모델 로드
-wv_ingredient_loaded = KeyedVectors.load('./recipe_embedding/_model_ingredient_wv') #wv 로드
 
 if '_menu2vec_wv' not in os.listdir('./recipe_embedding/'):
+  wv_ingredient_loaded = KeyedVectors.load('./recipe_embedding/_model_ingredient_wv')  # wv 로드
   menu2vec = menu_embedding.get_menu2vec(wv_ingredient_loaded)
   menu_embedding.save_menu2vec(menu2vec)
 menu2vec = menu_embedding.load_menu2vec()
@@ -50,11 +49,12 @@ print(food_recommend)
 food_rec_json_object = {} # food_recommend의 각 food에 대해 KakaoLocalAPI에 검색한 음식점 정보 Dictionary
 rest_api_key = "8edafea22605fecd679938e8880fa6ee"
 for food in food_recommend:
-  print(food)
-  food_rec_json_object[food] = KakaoLocalApi.local_api_keyword(rest_api_key=rest_api_key, keyword=food, size=5)
+  food_rec_json_object[food] = KakaoLocalApi.local_api_keyword(rest_api_key=rest_api_key, keyword=food, size=10)
 
 for food in food_recommend:
-  print(food, end=' -> ')
-  print(food_rec_json_object[food]['documents'][0]) # 검색한 음식점들 중 첫번째만 출력함
+  print("[{}]".format(food), end=' ')
+  print("Total_count: {}".format(food_rec_json_object[food]['meta']['total_count'])) # 각 food당 총 검색된 음식점 수
+  for i in range(len(food_rec_json_object[food]['documents'])): # 검색된 음식점 중 현재 page내의 정보 모두 출력
+    print(food_rec_json_object[food]['documents'][i])
 
 

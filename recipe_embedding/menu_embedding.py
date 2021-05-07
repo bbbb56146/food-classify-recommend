@@ -87,8 +87,6 @@ def get_menu2vec(loaded_wv):
       fi.close()
 
   print("length of menu2vec: %i" %(len(menu_dict)))
-  for key, value in menu_dict.items():
-    print(key, value)
   return menu2vec
 
 def save_menu2vec(menu2vec, filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
@@ -98,7 +96,8 @@ def load_menu2vec(filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
   return KeyedVectors.load(filepath + filename)
 
 print("aa")
-# 불러오기
+"""""# 불러오기
 model_ingredient_loaded = FastText.load('./_model_ingredient') #모델 로드
 wv_ingredient_loaded = KeyedVectors.load('./_model_ingredient_wv') #wv 로드
 get_menu2vec(wv_ingredient_loaded)
+"""

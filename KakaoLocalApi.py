@@ -17,7 +17,7 @@ def local_api_keyword(rest_api_key, quary, size=10, page=1):
   return json_object
 
 
-rest_api_key = "----" #REST API key
+rest_api_key = "8edafea22605fecd679938e8880fa6ee" #REST API key
 json_object = local_api_keyword(rest_api_key, '파스타', size=5)
 
 print(json_object['meta'])  # 메타데이터 출력

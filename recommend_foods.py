@@ -36,12 +36,12 @@ for menu, sim in food_sim.items():
   print(sim)
 print('\n')
 
-food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개수 만큼, similarity>0.97인 음식 선택)
+food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개 만큼, similarity>0.90인 음식 선택)
 for food, freq in food_freq.items():
   for i, food_sim_tuple in enumerate(food_sim.get(food)):
     if i >= freq:
       break
-    elif food_sim_tuple[1] > 0.97:
+    elif food_sim_tuple[1] > 0.90:
       food_recommend.append(food_sim_tuple[0])
 
 print(food_recommend)
@@ -57,4 +57,23 @@ for food in food_recommend:
   for i in range(len(food_rec_json_object[food]['documents'])): # 검색된 음식점 중 현재 page내의 정보 모두 출력
     print(food_rec_json_object[food]['documents'][i])
 
+"""
+food_freq_2 = {}
+for i, food in enumerate(menu2vec.index_to_key):
+  if i >= 50:
+    break
+  food_freq_2[food] = 1
+
+food_sim_2 = {} # food_freq의 각 food당 유사한 음식들의 목록
+for food in food_freq_2:
+  if food not in menu2vec.index_to_key:
+    food_sim_2[food] = []
+  else:
+    food_sim_2[food] = menu2vec.most_similar(positive=[food], topn=10)
+
+for menu, sim in food_sim_2.items():
+  print(menu, end=' -> ')
+  print(sim)
+print('\n')
+"""
 

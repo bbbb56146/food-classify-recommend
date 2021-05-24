@@ -1,204 +1,205 @@
-갈비탕
-감자국
-감자탕
-계란국
-국
-김치콩나물국
-꽃게탕
-닭개장
-닭곰탕
-닭볶음탕
-된장국
-떡국
-떡만두국
-만두국
-미역국
-밀푀유나베
-배추된장국
-북어국
-삼계탕
-소고기무국
-소고기미역국
-시금치된장국
-어묵국
-어묵탕
-오이냉국
-오징어무국
-육개장
-콩나물국
-탕
-홍합탕
-갈비찜
-갈치조림
-고등어조림
-고추잡채
-골뱅이무침
-구이
-낙지볶음
-닭갈비
-돈까스
-돼지갈비찜
-두부김치
-떡갈비
-마파두부
-불고기
-소갈비찜
-소불고기
-수육
-순대볶음
-오징어볶음
-월남쌈
-잡채
-제육볶음
-주꾸미볶음
-찜
-찜닭
-치킨
-코다리조림
-콩나물불고기
-탕수육
-국수
-김치비빔국수
-까르보나라
-냉면
-라면
-만두
-면
-바지락칼국수
-볶음라면
-볶음우동
-비빔국수
-비빔만두
-비빔면
-수제비
-스파게티
-알리오올리오
-열무비빔국수
-오일파스타
-우동
-잔치국수
-짜장면
-짬뽕
-쫄면
-칼국수
-콩국수
-크림스파게티
-크림파스타
-토마토스파게티
-토마토파스타
-파스타
-계란볶음밥
-국물떡볶이
-궁중떡볶이
-기름떡볶이
-김밥
-김치볶음밥
-꼬마김밥
-단호박죽
-덮밥
-떡
-떡꼬치
-떡볶이
-리조또
-밥
-볶음밥
-비빔밥
-새우볶음밥
-쌈밥
-오므라이스
-유부초밥
-전복죽
-주먹밥
-죽
-짜장밥
-참치김밥
-초밥
-카레
-카레라이스
-콩나물밥
-계란빵
-길거리토스트
-도넛
-또띠아피자
-롤케이크
-마늘빵
-마들렌
-머핀
-모닝빵
-버거
-브라우니
-브레드
-빵
-샌드위치
-스콘
-식빵
-와플
-치즈케이크
-치즈토스트
-카스테라
-컵케이크
-케이크
-토스트
-파운드케이크
-파이
-팬케이크
-프렌치토스트
-피자
-핫도그
-호떡
-감바스
-감바스알아히요
-감자그라탕
-고구마그라탕
-그라탕
-닭가슴살스테이크
-등심스테이크
-라따뚜이
-라자냐
-만두그라탕
-맥앤치즈
-브루스케타
-생선까스
-스크램블
-스크램블에그
-스테이크
-시금치프리타타
-안심스테이크
-에그인헬
-연어스테이크
-오믈렛
-찹스테이크
-치즈오믈렛
-퐁듀
-프리타타
-함박스테이크
-감자고추장찌개
-감자짜글이
-고추장찌개
-김치찌개
-꽁치김치찌개
-냉이된장찌개
-달래된장찌개
-동태찌개
-돼지고기고추장찌개
-돼지고기김치찌개
-된장찌개
-두부찌개
-바지락순두부찌개
-부대찌개
-비지찌개
-순두부찌개
-스튜
-스팸김치찌개
-애호박찌개
-오징어찌개
-우렁된장찌개
-전찌개
-짜글이
-찌개
-차돌박이된장찌개
-참치김치찌개
-청국장
-청국장찌개
-콩나물찌개
-콩비지찌개
+menu	category	sub_category	main_ingredient	origin
+갈비탕	국_탕	null	육류	null
+감자국	국_탕	null	null	null
+감자탕	국_탕	null	육류	null
+계란국	국_탕	null	null	null
+국	국_탕	null	null	null
+김치콩나물국	국_탕	null	null	null
+꽃게탕	국_탕	null	해산물	null
+닭개장	국_탕	null	닭고기	null
+닭곰탕	국_탕	null	닭고기	null
+닭볶음탕	국_탕	null	닭고기	null
+된장국	국_탕	null	null	null
+떡국	국_탕	null	null	null
+떡만두국	국_탕	null	null	null
+만두국	국_탕	null	null	null
+미역국	국_탕	null	해산물	null
+밀푀유나베	국_탕	null	null	일식
+배추된장국	국_탕	null	null	null
+북어국	국_탕	null	해산물	null
+삼계탕	국_탕	null	닭고기	null
+소고기무국	국_탕	null	육류	null
+소고기미역국	국_탕	null	육류	null
+시금치된장국	국_탕	null	null	null
+어묵국	국_탕	null	null	null
+어묵탕	국_탕	null	null	null
+오이냉국	국_탕	null	null	null
+오징어무국	국_탕	null	해산물	null
+육개장	국_탕	null	육류	null
+콩나물국	국_탕	null	null	null
+탕	국_탕	null	null	null
+홍합탕	국_탕	null	해산물	null
+갈비찜	메인반찬	null	육류	null
+갈치조림	메인반찬	null	해산물	null
+고등어조림	메인반찬	null	해산물	null
+고추잡채	메인반찬	null	null	null
+골뱅이무침	메인반찬	null	해산물	null
+구이	메인반찬	null	null	null
+낙지볶음	메인반찬	null	해산물	null
+닭갈비	메인반찬	null	닭고기	null
+돈까스	메인반찬	null	육류	일식
+돼지갈비찜	메인반찬	null	육류	null
+두부김치	메인반찬	null	null	null
+떡갈비	메인반찬	null	육류	null
+마파두부	메인반찬	null	null	중식
+불고기	메인반찬	null	육류	null
+소갈비찜	메인반찬	null	육류	null
+소불고기	메인반찬	null	육류	null
+수육	메인반찬	null	육류	null
+순대볶음	메인반찬	null	null	null
+오징어볶음	메인반찬	null	해산물	null
+월남쌈	메인반찬	null	null	null
+잡채	메인반찬	null	null	null
+제육볶음	메인반찬	null	육류	null
+주꾸미볶음	메인반찬	null	해산물	null
+찜	메인반찬	null	null	null
+찜닭	메인반찬	null	닭고기	null
+치킨	메인반찬	null	닭고기	null
+코다리조림	메인반찬	null	해산물	null
+콩나물불고기	메인반찬	null	null	null
+탕수육	메인반찬	null	육류	중식
+국수	면_만두	국수류	null	null
+김치비빔국수	면_만두	국수류	null	null
+까르보나라	면_만두	파스타	null	null
+냉면	면_만두	국수류	null	null
+라면	면_만두	국수류	null	null
+만두	면_만두	null	null	null
+면	면_만두	null	null	null
+바지락칼국수	면_만두	국수류	해산물	null
+볶음라면	면_만두	국수류	null	null
+볶음우동	면_만두	국수류	null	일식
+비빔국수	면_만두	국수류	null	null
+비빔만두	면_만두	null	null	null
+비빔면	면_만두	국수류	null	null
+수제비	면_만두	null	null	null
+스파게티	면_만두	파스타	null	null
+알리오올리오	면_만두	파스타	null	null
+열무비빔국수	면_만두	국수류	null	null
+오일파스타	면_만두	파스타	null	null
+우동	면_만두	국수류	null	일식
+잔치국수	면_만두	국수류	null	null
+짜장면	면_만두	국수류	null	중식
+짬뽕	면_만두	국수류	null	중식
+쫄면	면_만두	국수류	null	null
+칼국수	면_만두	국수류	null	null
+콩국수	면_만두	국수류	null	null
+크림스파게티	면_만두	파스타	null	null
+크림파스타	면_만두	파스타	null	null
+토마토스파게티	면_만두	파스타	null	null
+토마토파스타	면_만두	파스타	null	null
+파스타	면_만두	null	null	양식
+계란볶음밥	밥_죽_떡	null	null	중식
+국물떡볶이	밥_죽_떡	null	null	null
+궁중떡볶이	밥_죽_떡	null	null	null
+기름떡볶이	밥_죽_떡	null	null	null
+김밥	밥_죽_떡	null	null	null
+김치볶음밥	밥_죽_떡	null	null	null
+꼬마김밥	밥_죽_떡	null	null	null
+단호박죽	밥_죽_떡	null	null	null
+덮밥	밥_죽_떡	null	null	null
+떡	밥_죽_떡	null	null	null
+떡꼬치	밥_죽_떡	null	null	null
+떡볶이	밥_죽_떡	null	null	null
+리조또	밥_죽_떡	null	null	null
+밥	밥_죽_떡	null	null	null
+볶음밥	밥_죽_떡	null	null	중식
+비빔밥	밥_죽_떡	null	null	null
+새우볶음밥	밥_죽_떡	null	해산물	null
+쌈밥	밥_죽_떡	null	null	null
+오므라이스	밥_죽_떡	null	null	null
+유부초밥	밥_죽_떡	null	null	일식
+전복죽	밥_죽_떡	null	null	null
+주먹밥	밥_죽_떡	null	null	일식
+죽	밥_죽_떡	null	null	null
+짜장밥	밥_죽_떡	null	null	중식
+참치김밥	밥_죽_떡	null	null	null
+초밥	밥_죽_떡	null	해산물	일식
+카레	밥_죽_떡	null	null	null
+카레라이스	밥_죽_떡	null	null	일식
+콩나물밥	밥_죽_떡	null	null	null
+계란빵	빵	null	null	null
+길거리토스트	빵	null	null	null
+도넛	빵	null	null	null
+또띠아피자	빵	null	null	null
+롤케이크	빵	null	null	null
+마늘빵	빵	null	null	null
+마들렌	빵	null	null	null
+머핀	빵	null	null	null
+모닝빵	빵	null	null	null
+버거	빵	null	육류	null
+브라우니	빵	null	null	null
+브레드	빵	null	null	null
+빵	빵	null	null	null
+샌드위치	빵	null	null	null
+스콘	빵	null	null	null
+식빵	빵	null	null	null
+와플	빵	null	null	null
+치즈케이크	빵	null	null	null
+치즈토스트	빵	null	null	null
+카스테라	빵	null	null	null
+컵케이크	빵	null	null	null
+케이크	빵	null	null	null
+토스트	빵	null	null	null
+파운드케이크	빵	null	null	null
+파이	빵	null	null	null
+팬케이크	빵	null	null	null
+프렌치토스트	빵	null	null	null
+피자	빵	null	null	양식
+핫도그	빵	null	null	null
+호떡	빵	null	null	null
+감바스	양식	null	null	양식
+감바스알아히요	양식	null	null	양식
+감자그라탕	양식	null	null	양식
+고구마그라탕	양식	null	null	양식
+그라탕	양식	null	null	양식
+닭가슴살스테이크	양식	null	닭고기	양식
+등심스테이크	양식	null	육류	양식
+라따뚜이	양식	null	null	양식
+라자냐	양식	null	null	양식
+만두그라탕	양식	null	null	양식
+맥앤치즈	양식	null	null	양식
+브루스케타	양식	null	null	양식
+생선까스	양식	null	해산물	양식
+스크램블	양식	null	null	양식
+스크램블에그	양식	null	null	양식
+스테이크	양식	null	육류	양식
+시금치프리타타	양식	null	null	양식
+안심스테이크	양식	null	육류	양식
+에그인헬	양식	null	null	양식
+연어스테이크	양식	null	해산물	양식
+오믈렛	양식	null	null	양식
+찹스테이크	양식	null	육류	양식
+치즈오믈렛	양식	null	null	양식
+퐁듀	양식	null	null	양식
+프리타타	양식	null	null	양식
+함박스테이크	양식	null	육류	양식
+감자고추장찌개	찌개	null	null	null
+감자짜글이	찌개	null	null	null
+고추장찌개	찌개	null	null	null
+김치찌개	찌개	null	null	null
+꽁치김치찌개	찌개	null	null	null
+냉이된장찌개	찌개	null	null	null
+달래된장찌개	찌개	null	null	null
+동태찌개	찌개	null	해산물	null
+돼지고기고추장찌개	찌개	null	육류	null
+돼지고기김치찌개	찌개	null	육류	null
+된장찌개	찌개	null	null	null
+두부찌개	찌개	null	null	null
+바지락순두부찌개	찌개	null	해산물	null
+부대찌개	찌개	null	육류	null
+비지찌개	찌개	null	null	null
+순두부찌개	찌개	null	null	null
+스튜	찌개	null	null	null
+스팸김치찌개	찌개	null	null	null
+애호박찌개	찌개	null	null	null
+오징어찌개	찌개	null	해산물	null
+우렁된장찌개	찌개	null	해산물	null
+전찌개	찌개	null	null	null
+짜글이	찌개	null	null	null
+찌개	찌개	null	null	null
+차돌박이된장찌개	찌개	null	육류	null
+참치김치찌개	찌개	null	null	null
+청국장	찌개	null	null	null
+청국장찌개	찌개	null	null	null
+콩나물찌개	찌개	null	null	null
+콩비지찌개	찌개	null	null	null

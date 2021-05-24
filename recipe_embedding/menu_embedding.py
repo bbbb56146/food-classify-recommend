@@ -58,7 +58,7 @@ def get_menu2vec(loaded_wv):
   menu_dict = {}  # 메뉴 딕셔너리
   recipe_sum=0 #csv 파일 속 레시피 수
   recipe_idx = 0
-  direction = '../recipe_data/'
+  direction = './recipe_data/'
   print(os.listdir(direction))
   recipe_folder = os.listdir(direction)
   for i, folder in enumerate(recipe_folder):  # 폴더 속 탐색
@@ -96,9 +96,10 @@ def save_menu2vec(menu2vec, filepath = './recipe_embedding/', filename = '_menu2
 
 def load_menu2vec(filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
   return KeyedVectors.load(filepath + filename)
-
+'''
 print("aa")
 # 불러오기
 model_ingredient_loaded = FastText.load('./_model_ingredient') #모델 로드
 wv_ingredient_loaded = KeyedVectors.load('./_model_ingredient_wv') #wv 로드
 get_menu2vec(wv_ingredient_loaded)
+'''

@@ -53,7 +53,7 @@ set_food_all = []
 for foods in category.values():
   set_food_all = set_food_all + foods
 set_food_all = list(set(set_food_all))
-
+'''
 #임의의 집합
 set_noodle = ['국수','김치비빔국수', '냉면', '라면', '바지락칼국수', '볶음라면', '볶음우동', '비빔국수', '비빔면',
               '열무비빔국수', '우동', '잔치국수', '짜장면', '짬뽕', '쫄면', '칼국수', '콩국수']
@@ -68,9 +68,11 @@ set_meat = ['갈비탕', '감자탕', '소고기무국', '소고기미역국', '
 set_chinese = ['마파두부', '탕수육', '짜장면', '짬뽕', '계란볶음밥', '볶음밥', '짜장밥']
 set_japanese = ['밀푀유나베', '돈까스', '볶음우동', '우동', '유부초밥', '주먹밥', '초밥', '카레라이스']
 set_dumpling = ['수제비', '비빔만두', '만두']
+'''
 
 
-set_food = set_meat
+
+set_food = set_noodle + set_pasta
 set_food = list(set(set_food))
 print(set_food)
 print("num of menu: {}".format(len(set_food)))
@@ -88,8 +90,8 @@ print("Average of similarities: {}".format(set_sim_avg))
 
 
 diff_set_similarity = [] #서로다른 두 집합의 메뉴의 유사도 값들을 저장한 리스트
-set_food_A = set_noodle
-set_food_B = set_meat
+set_food_A = category['밥_죽_떡']
+set_food_B = set_noodle
 for food_A in set_food_A:
   for food_B in set_food_B:
     if food_A != food_B:

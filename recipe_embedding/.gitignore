@@ -1,5 +1,4 @@
 .idea
 recipe_data
-__pycache__
 _model_ingredient.*
 _model_ingredient_wv.*

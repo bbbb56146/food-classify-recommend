@@ -51,20 +51,20 @@ def get_sum (recipe_tot):
     ans+=i
   return ans
 
-def get_menu2vec(loaded_wv):
+def get_menu2vec(loaded_wv, filepath = '../recipe_data/'):
   menu2vec = KeyedVectors(vector_size=100) # menu embedding 결과를 저장
 
   menu_name = ""  # 메뉴명 문자열
-  menu_dict = {}  # 메뉴 딕셔너리
+  # menu_dict = {}  # 메뉴 딕셔너리
   recipe_sum=0 #csv 파일 속 레시피 수
   recipe_idx = 0
-  direction = './recipe_data/'
-  print(os.listdir(direction))
-  recipe_folder = os.listdir(direction)
+  # direction = './recipe_data/'
+  print(os.listdir(filepath))
+  recipe_folder = os.listdir(filepath)
   for i, folder in enumerate(recipe_folder):  # 폴더 속 탐색
-    csv_filepath = os.listdir(direction + folder)
+    csv_filepath = os.listdir(filepath + folder)
     for j, csv_file in enumerate(csv_filepath):  # csv 파일 속 탐색
-      fi = open(direction + folder + '/' + csv_file, 'rt', encoding='UTF8')
+      fi = open(filepath + folder + '/' + csv_file, 'rt', encoding='UTF8')
       rdr = csv.reader(fi)
       recipe_vec = [0 for i in range(100)]  # 100 : wv size
       for k, row in enumerate(rdr):
@@ -86,16 +86,17 @@ def get_menu2vec(loaded_wv):
       menu2vec.add_vector(menu_name, recipe_vec)
       fi.close()
 
-  print("length of menu2vec: %i" %(len(menu_dict)))
-  for key, value in menu_dict.items():
-    print(key, value)
+  print("length of menu2vec: %i" %(len(menu2vec.index_to_key)))
+  print("menu2vec embedding finished!")
   return menu2vec
+
 
 def save_menu2vec(menu2vec, filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
   menu2vec.save(filepath + filename)
 
 def load_menu2vec(filepath = './recipe_embedding/', filename = '_menu2vec_wv'):
   return KeyedVectors.load(filepath + filename)
+
 '''
 print("aa")
 # 불러오기

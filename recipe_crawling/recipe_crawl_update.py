@@ -4,8 +4,6 @@ from bs4 import BeautifulSoup
 import csv
 import os
 
-# category, base_url 값을 직접 바꿔주어야 함!
-
 # 해당 주소(url_pre + url_href)에서 recipie의 제목과 재료를 크롤링
 def crawl_from_url(url_href):
     url_pre = "https://www.10000recipe.com"
@@ -50,35 +48,14 @@ def crawl_href(keyword, order, page):
     for addr_code in addr_codes:
         recipe_href.append(addr_code.get('href'))
 
-
-# url주소로부터 keywords(음식 종류) crawling
-def crawl_keyword(url):
-    req = urllib.request.urlopen(url)
-    res = req.read()
-    soup = BeautifulSoup(res, 'html.parser') # BeautifulSoup 객체생성
-
-    keyword_codes = soup.find('ul', 'tag_cont')
-    keyword_codes = keyword_codes.find_all('li')
-    for keyword_code in keyword_codes:
-        keywords.append(keyword_code.get_text())
-
-
 # 폴더 생성
 def createdir(direction):
     if not os.path.exists(direction):
         os.makedirs(direction)
 
 
-# category에 해당하는 keywords 얻기
-keywords = []   # base_url로 들어가면 상단에 나열되어 있는 음식메뉴들
-category = "양식" # 카테고리 변경시마다 수정! (category 이름에 해당하는 폴더로 저장됨)
-# 만개의레시피 메인페이지->'분류'->'종류별'에서 category 선택->링크 복사!
-base_url = "https://www.10000recipe.com/recipe/list.html?q=&query=&cat1=&cat2=&cat3=&cat4=65&fct=&order=reco&lastcate=cat4&dsearch=&copyshot=&scrap=&degree=&portion=&time=&niresource="
-crawl_keyword(base_url)
-for word in keywords:
-    print("|" + word + "|", end="-")
-print("\n\n")
-
+# 새로 crawling할 음식들 목록 지정!
+keywords = ['마라탕', '쌀국수', '가지볶음', '오믈렛']
 
 # 각 keyword(음식 메뉴)에 대해 진행
 for i, keyword in enumerate(keywords):
@@ -103,7 +80,7 @@ for i, keyword in enumerate(keywords):
     print(len(recipe_title))    # 해당 keyword에 대한 크롤링이 완료되면, 크롤링한 페이지 수를 출력
 
     # csv파일로 저장
-    direction = './recipe_data/'+category
+    direction = './New_csv/'
     createdir(direction)
     csv_wr = open(direction + '/recipe_'+ keyword + '.csv', 'w', encoding='UTF8')
     wtr = csv.writer(csv_wr, lineterminator='\n')
@@ -112,3 +89,11 @@ for i, keyword in enumerate(keywords):
         wtr.writerow([recipe_title[i], "https://www.10000recipe.com"+recipe_href[i]])
         wtr.writerow(recipe_ingre[i])
     csv_wr.close()
+
+    '''
+    csv_rd = open(direction + '/recipe_'+ keyword + '.csv', 'r', encoding='UTF8')
+    rdr = csv.reader(csv_rd)
+    for row in rdr:
+        print(row)
+    csv_rd.close()
+    '''

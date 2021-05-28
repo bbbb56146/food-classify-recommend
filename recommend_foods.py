@@ -74,10 +74,10 @@ food_freq['쌀국수'] = 1 # '씰국수'는 menu2vec에 포함되어있지 않�
 menu2vec = menu_embedding.load_menu2vec(filepath='./recipe_embedding/', filename='_menu2vec_wv')
 print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
 
-food_sim = get_food_sim(menu2vec, food_freq, 10)
-food_recommend = get_food_recommend(food_freq, food_sim)
+food_sim = get_food_sim(menu2vec, food_freq, 10)  # 각 key값에 대해 유사메뉴 리스트 생성
+food_recommend = get_food_recommend(food_freq, food_sim) # 최종 추천 리스트 생성
 
-food_rec_query_result = KakaoLocalQuery(food_recommend, size=10)
+food_rec_query_result = KakaoLocalQuery(food_recommend, size=10) # 최종 추천리스트에 해당하는 음식점 검색
 
 for food in food_recommend:
   print("[{}]".format(food), end=' ')

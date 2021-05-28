@@ -41,9 +41,19 @@ def get_food_sim (menu2vec, food_pref_dic, topn=10):
   return food_sim
 
 # 최종 추천 리스트 생성
-def get_food_recommend (food_pref_dic, food_sim):
-  food_recommend = []  # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개 만큼, similarity>0.90인 음식 선택)
+def get_food_recommend (food_pref_dic, food_sim, size=10):
+  food_recommend = []  # 추천할 음식 list (각 음식 당 최대 freq개 만큼, similarity>0.90인 음식 선택)
+  freq_sum = 0  # food_pref_dic의 freq 총합 (menu2vec에 없는 menu 제외)
   for food, freq in food_pref_dic.items():
+    if len(food_sim[food]) != 0:
+      freq_sum += freq
+  food_pref_dic_mod = {} # freq 총합이 size에 가까워지도록 조정 (menu2vec에 없는 menu 제외)
+  for food, freq in food_pref_dic.items():
+    if len(food_sim[food]) != 0:
+      food_pref_dic_mod[food] = round((freq / freq_sum) * size)
+  print("modified food_pref_dict: {}".format(food_pref_dic_mod))
+
+  for food, freq in food_pref_dic_mod.items():
     for i, food_sim_tuple in enumerate(food_sim.get(food)):
       if i >= freq:
         break
@@ -65,17 +75,20 @@ def KakaoLocalQuery (food_recommend, size = 10):
 # Food Classifier에서 분류 결과로서 생성한 dictionory라고 가정함 (food_preference_dictionary)
 food_freq = {}
 food_freq['닭갈비'] = 6
-food_freq['오일파스타'] = 4
-food_freq['김밥'] = 2
-food_freq['된장찌개'] = 1
-food_freq['쌀국수'] = 1 # '씰국수'는 menu2vec에 포함되어있지 않음!
+food_freq['오일파스타'] = 8
+food_freq['김밥'] = 3
+food_freq['된장찌개'] = 5
+food_freq['쌀국수'] = 2 # '씰국수'는 menu2vec에 포함되어있지 않음!
 
 
 menu2vec = menu_embedding.load_menu2vec(filepath='./recipe_embedding/', filename='_menu2vec_wv')
 print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
 
+food_freq = dict(sorted(food_freq.items(), key=(lambda x: x[1]), reverse=True)) # food_pref_dict를 정렬
+print("food_preference_dict: {}".format(food_freq))
+
 food_sim = get_food_sim(menu2vec, food_freq, 10)  # 각 key값에 대해 유사메뉴 리스트 생성
-food_recommend = get_food_recommend(food_freq, food_sim) # 최종 추천 리스트 생성
+food_recommend = get_food_recommend(food_freq, food_sim, size=10) # 최종 추천 리스트 생성
 
 food_rec_query_result = KakaoLocalQuery(food_recommend, size=10) # 최종 추천리스트에 해당하는 음식점 검색
 

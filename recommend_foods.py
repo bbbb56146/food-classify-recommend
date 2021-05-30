@@ -24,6 +24,15 @@ def softmax_sum_n (np_array, sum = 10):
   print("sigmoid sum_n : {}".format(res*10))
   return res
 
+# food_pref_dic에 user_feedback을 ratio비율 만큼 추가함
+def add_user_feedback (food_pref_dic, user_feedback, ratio = 0.25):
+  for food in user_feedback.keys():
+    if food in food_pref_dic.keys():
+      food_pref_dic[food] += user_feedback[food] * ratio
+    else:
+      food_pref_dic[food] = user_feedback[food] * ratio
+
+
 # food_pref_dic의 각 key에 대해서 유사메뉴리스트 얻기
 def get_food_sim (menu2vec, food_pref_dic, topn=10):
   food_sim = {}  # food_freq의 각 food당 유사한 음식들의 목록
@@ -51,7 +60,7 @@ def get_food_recommend (food_pref_dic, food_sim, size=10):
   for food, freq in food_pref_dic.items():
     if len(food_sim[food]) != 0:
       food_pref_dic_mod[food] = round((freq / freq_sum) * size)
-  print("modified food_pref_dict: {}".format(food_pref_dic_mod))
+  print("number of menu recommended: {}".format(food_pref_dic_mod))
 
   for food, freq in food_pref_dic_mod.items():
     for i, food_sim_tuple in enumerate(food_sim.get(food)):
@@ -80,12 +89,18 @@ food_freq['김밥'] = 3
 food_freq['된장찌개'] = 5
 food_freq['쌀국수'] = 2 # '씰국수'는 menu2vec에 포함되어있지 않음!
 
+user_feedback = {}
+user_feedback['닭갈비'] = 4
+user_feedback['김밥'] = 13
+user_feedback['떡볶이'] = 7
+
+add_user_feedback(food_freq, user_feedback) # food_freq에 user_feedback 적용
 
 menu2vec = menu_embedding.load_menu2vec(filepath='./recipe_embedding/', filename='_menu2vec_wv')
-print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
+#print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
 
 food_freq = dict(sorted(food_freq.items(), key=(lambda x: x[1]), reverse=True)) # food_pref_dict를 정렬
-print("food_preference_dict: {}".format(food_freq))
+print("sorted food_preference_dict: {}".format(food_freq))
 
 food_sim = get_food_sim(menu2vec, food_freq, 10)  # 각 key값에 대해 유사메뉴 리스트 생성
 food_recommend = get_food_recommend(food_freq, food_sim, size=10) # 최종 추천 리스트 생성

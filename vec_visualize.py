@@ -125,8 +125,8 @@ for food in menu2vec.index_to_key:
     Label_flag[X_set[9]] = 0
   else:
     C.append('black')
-    Label.append('기타')
-    Label_flag['기타'] = 0
+    Label.append('')
+    Label_flag[''] = 0
 tsne = TSNE(n_components=2, perplexity=10)
 X_tsne = tsne.fit_transform(X)  # tsne로 차원 축소
 df = pd.DataFrame(X_tsne, index=vocab, columns=['x', 'y'])
@@ -174,8 +174,8 @@ for food in vocab:
     Label_flag[Y_set[3]] = 0
   else:
     C.append('black')
-    Label.append('기타')
-    Label_flag['기타'] = 0
+    Label.append('')
+    Label_flag[''] = 1
 
 show_tsne(df, 'menu2vec_tsne_origin.png')
 

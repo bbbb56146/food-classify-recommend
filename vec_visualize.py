@@ -42,7 +42,7 @@ def show_tsne(df, filename='menu2vec_tsne.png'):
 
   fig_tsne = plt.gcf()
   plt.show(loc=(1.0, 1.0)) # plot을 출력
-  fig_tsne.savefig('./' + filename) # plot을 이미지 파일로 저장
+  fig_tsne.savefig('./tsne_image/' + filename) # plot을 이미지 파일로 저장
 
 
 # 폳더별로 menu의 category 분류하기

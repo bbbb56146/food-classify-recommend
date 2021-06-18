@@ -9,71 +9,108 @@ import numpy as np
 from recipe_embedding import menu_embedding
 import KakaoLocalApi
 
+def dict_to_numpy (dict):
+  np_array = np.array(list(dict.values()))
+  print(dict)
+  print(np_array)
+  return np_array
 
-if '_menu2vec_wv' not in os.listdir('./recipe_embedding/'):
-  wv_ingredient_loaded = KeyedVectors.load('./recipe_embedding/_model_ingredient_wv')  # wv 로드
-  menu2vec = menu_embedding.get_menu2vec(wv_ingredient_loaded)
-  menu_embedding.save_menu2vec(menu2vec)
-menu2vec = menu_embedding.load_menu2vec()
-print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
+def softmax_sum_n (np_array, sum = 10):
+  exp_a = np.exp(np_array)
+  exp_sum = np.sum(exp_a)
+  res = exp_a / exp_sum
+  print("original array: {}".format(np_array))
+  print("exp(org array): {}".format(exp_a))
+  print("sigmoid sum_n : {}".format(res*10))
+  return res
 
-food_freq = {} # Food Classifier에서 분류 결과로서 생성한 dictionory라고 가정함
+# food_pref_dic에 user_feedback을 ratio비율 만큼 추가함
+def add_user_feedback (food_pref_dic, user_feedback, ratio = 0.25):
+  for food in user_feedback.keys():
+    if food in food_pref_dic.keys():
+      food_pref_dic[food] += user_feedback[food] * ratio
+    else:
+      food_pref_dic[food] = user_feedback[food] * ratio
+
+
+# food_pref_dic의 각 key에 대해서 유사메뉴리스트 얻기
+def get_food_sim (menu2vec, food_pref_dic, topn=10):
+  food_sim = {}  # food_freq의 각 food당 유사한 음식들의 목록
+  for food in food_pref_dic:
+    if food not in menu2vec.index_to_key:
+      food_sim[food] = []
+    else:
+      food_sim[food] = menu2vec.most_similar(positive=[food], topn=topn)
+
+  for menu, sim in food_sim.items():
+    print(menu, end=' -> ')
+    print(sim)
+  print('\n')
+
+  return food_sim
+
+# 최종 추천 리스트 생성
+def get_food_recommend (food_pref_dic, food_sim, size=10):
+  food_recommend = []  # 추천할 음식 list (각 음식 당 최대 freq개 만큼, similarity>0.90인 음식 선택)
+  freq_sum = 0  # food_pref_dic의 freq 총합 (menu2vec에 없는 menu 제외)
+  for food, freq in food_pref_dic.items():
+    if len(food_sim[food]) != 0:
+      freq_sum += freq
+  food_pref_dic_mod = {} # freq 총합이 size에 가까워지도록 조정 (menu2vec에 없는 menu 제외)
+  for food, freq in food_pref_dic.items():
+    if len(food_sim[food]) != 0:
+      food_pref_dic_mod[food] = round((freq / freq_sum) * size)
+  print("number of menu recommended: {}".format(food_pref_dic_mod))
+
+  for food, freq in food_pref_dic_mod.items():
+    for i, food_sim_tuple in enumerate(food_sim.get(food)):
+      if i >= freq:
+        break
+      elif food_sim_tuple[1] > 0.90:
+        food_recommend.append(food_sim_tuple[0])
+
+  print("food_recommend: {}".format(food_recommend))
+  return food_recommend
+
+# food_recommend의 각 food에 대해 Kakao local Api에 query를 한 결과
+def KakaoLocalQuery (food_recommend, size = 10):
+  food_rec_json_object = {}  # food_recommend의 각 food에 대해 KakaoLocalAPI에 검색한 음식점 정보 Dictionary
+  rest_api_key = "8edafea22605fecd679938e8880fa6ee"
+  for food in food_recommend:
+    food_rec_json_object[food] = KakaoLocalApi.local_api_keyword(rest_api_key=rest_api_key, keyword=food, size=size)
+  return food_rec_json_object
+
+
+# Food Classifier에서 분류 결과로서 생성한 dictionory라고 가정함 (food_preference_dictionary)
+food_freq = {}
 food_freq['닭갈비'] = 6
-food_freq['오일파스타'] = 4
-food_freq['김밥'] = 2
-food_freq['된장찌개'] = 1
-food_freq['쌀국수'] = 1 # '씰국수'는 menu2vec에 포함되어있지 않음!
+food_freq['오일파스타'] = 8
+food_freq['김밥'] = 3
+food_freq['된장찌개'] = 5
+food_freq['쌀국수'] = 2 # '씰국수'는 menu2vec에 포함되어있지 않음!
 
-food_sim = {} # food_freq의 각 food당 유사한 음식들의 목록
-for food in food_freq:
-  if food not in menu2vec.index_to_key:
-    food_sim[food] = []
-  else:
-    food_sim[food] = menu2vec.most_similar(positive=[food], topn=10)
+user_feedback = {}
+user_feedback['닭갈비'] = 4
+user_feedback['김밥'] = 13
+user_feedback['떡볶이'] = 7
 
-for menu, sim in food_sim.items():
-  print(menu, end=' -> ')
-  print(sim)
-print('\n')
+add_user_feedback(food_freq, user_feedback) # food_freq에 user_feedback 적용
 
-food_recommend = [] # 추천할 음식 list (각 food의 유사음식 list 에서, 최대 freq개 만큼, similarity>0.90인 음식 선택)
-for food, freq in food_freq.items():
-  for i, food_sim_tuple in enumerate(food_sim.get(food)):
-    if i >= freq:
-      break
-    elif food_sim_tuple[1] > 0.90:
-      food_recommend.append(food_sim_tuple[0])
+menu2vec = menu_embedding.load_menu2vec(filepath='./recipe_embedding/', filename='_menu2vec_wv')
+#print(menu2vec.index_to_key) # menu2vec에 포함된 memu 목록
 
-print(food_recommend)
+food_freq = dict(sorted(food_freq.items(), key=(lambda x: x[1]), reverse=True)) # food_pref_dict를 정렬
+print("sorted food_preference_dict: {}".format(food_freq))
 
-food_rec_json_object = {} # food_recommend의 각 food에 대해 KakaoLocalAPI에 검색한 음식점 정보 Dictionary
-rest_api_key = "8edafea22605fecd679938e8880fa6ee"
-for food in food_recommend:
-  food_rec_json_object[food] = KakaoLocalApi.local_api_keyword(rest_api_key=rest_api_key, keyword=food, size=10)
+food_sim = get_food_sim(menu2vec, food_freq, 10)  # 각 key값에 대해 유사메뉴 리스트 생성
+food_recommend = get_food_recommend(food_freq, food_sim, size=10) # 최종 추천 리스트 생성
+
+food_rec_query_result = KakaoLocalQuery(food_recommend, size=10) # 최종 추천리스트에 해당하는 음식점 검색
 
 for food in food_recommend:
   print("[{}]".format(food), end=' ')
-  print("Total_count: {}".format(food_rec_json_object[food]['meta']['total_count'])) # 각 food당 총 검색된 음식점 수
-  for i in range(len(food_rec_json_object[food]['documents'])): # 검색된 음식점 중 현재 page내의 정보 모두 출력
-    print(food_rec_json_object[food]['documents'][i])
+  print("Total_count: {}".format(food_rec_query_result[food]['meta']['total_count'])) # 각 food당 총 검색된 음식점 수
+  for i in range(len(food_rec_query_result[food]['documents'])): # 검색된 음식점 중 현재 page내의 정보 모두 출력
+    print(food_rec_query_result[food]['documents'][i])
 
-"""
-food_freq_2 = {}
-for i, food in enumerate(menu2vec.index_to_key):
-  if i >= 50:
-    break
-  food_freq_2[food] = 1
-
-food_sim_2 = {} # food_freq의 각 food당 유사한 음식들의 목록
-for food in food_freq_2:
-  if food not in menu2vec.index_to_key:
-    food_sim_2[food] = []
-  else:
-    food_sim_2[food] = menu2vec.most_similar(positive=[food], topn=10)
-
-for menu, sim in food_sim_2.items():
-  print(menu, end=' -> ')
-  print(sim)
-print('\n')
-"""
 

@@ -21,13 +21,19 @@ print(params_dict)
 
 req = requests.get('http://127.0.0.1:5000//method', params=params_dict)
 json_object = json.loads(req.text)
-#print(json_object)
+print(json_object)
 
 for key in json_object.keys():
+  if key == 'info':
+    continue
   print(key)
   print("MetaData : {}".format(json_object[key]['meta']))
   for document in json_object[key]['documents']:
     print(document)
+
+for info in json_object['info']:
+  print(info) #추천메뉴, 유사도, 추천 가게 수
+
 
 '''
 params = {}

@@ -19,8 +19,7 @@ params_dict['food_freq'] = json.dumps(food_freq, ensure_ascii=False) # food_freq
 params_dict['user_feedback'] = json.dumps(user_feedback, ensure_ascii=False) # user_feedback dictionary를 json으로 바꾼 값
 print(params_dict)
 
-params = {}
-req = requests.get('http://127.0.0.1:8000/frc_api/', params=params_dict)
+req = requests.get('http://127.0.0.1:5000//method', params=params_dict)
 json_object = json.loads(req.text)
 #print(json_object)
 

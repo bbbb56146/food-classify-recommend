@@ -33,15 +33,7 @@ for data in json_object['data']:
       print(doc)
     print("\n")
 
-'''
-for key in json_object.keys():
-  if key == 'info':
-    continue
-  print(key)
-  print("MetaData : {}".format(json_object[key]['meta']))
-  for document in json_object[key]['documents']:
-    print(document)
-'''
+
 
 
 

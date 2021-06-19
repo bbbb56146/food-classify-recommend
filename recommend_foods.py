@@ -5,6 +5,7 @@ import csv
 import os
 import numpy as np
 
+
 # import local files
 from recipe_embedding import menu_embedding
 import KakaoLocalApi

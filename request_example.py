@@ -23,6 +23,17 @@ req = requests.get('http://127.0.0.1:5000//method', params=params_dict)
 json_object = json.loads(req.text)
 print(json_object)
 
+for info in json_object['info']:
+  print(info) #추천메뉴, 유사도, 추천 가게 수
+
+for data in json_object['data']:
+    print(data['menuName'])
+    print("Metadata : {}".format(data['meta']))
+    for doc in data['document']:
+      print(doc)
+    print("\n")
+
+'''
 for key in json_object.keys():
   if key == 'info':
     continue
@@ -30,43 +41,7 @@ for key in json_object.keys():
   print("MetaData : {}".format(json_object[key]['meta']))
   for document in json_object[key]['documents']:
     print(document)
-
-for info in json_object['info']:
-  print(info) #추천메뉴, 유사도, 추천 가게 수
-
-
-'''
-params = {}
-req = requests.get('http://127.0.0.1:8000/frc_api/', params=food_freq)
-json_object = json.loads(req.text)
-#print(json_object)
-
-for key in json_object.keys():
-  print(key)
-  print("MetaData : {}".format(json_object[key]['meta']))
-  for document in json_object[key]['documents']:
-    print(document)
 '''
 
-'''
-array_1 = '{"A" : 1, "B" : 15, "C": 9 }'
-json_data = json.loads(array_1)
-print(json_data)
-print(json_data['A'])
 
 
-array_2 = {
-    'food_pref_dict': {}
-}
-array_2['food_pref_dict']['닭갈비'] = 6
-array_2['food_pref_dict']['오일파스타'] = 8
-array_2['food_pref_dict']['김밥'] = 3
-array_2['food_pref_dict']['된장찌개'] = 5
-array_2['food_pref_dict']['쌀국수'] = 2
-
-with open('array_2.json', 'w', encoding='UTF-8') as f:
-    json.dump(array_2, f, ensure_ascii=False)
-
-json_data = open('array_2.json', 'r', encoding='UTF-8').read()
-print(json_data)
-'''

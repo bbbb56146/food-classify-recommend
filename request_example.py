@@ -18,11 +18,12 @@ params_dict = {}
 params_dict['food_freq'] = json.dumps(food_freq, ensure_ascii=False) # food_freq dictionary를 json으로 바꾼 값
 params_dict['user_feedback'] = json.dumps(user_feedback, ensure_ascii=False) # user_feedback dictionary를 json으로 바꾼 값
 print(params_dict)
-
-req = requests.get('http://127.0.0.1:5000//method', params=params_dict)
+print("=================================PARAM END===============\n\n\n")
+req = requests.get('http://52.79.168.220:5000//method', params=params_dict)
 json_object = json.loads(req.text)
+print("=========start JSON===============\n\n\n")
 print(json_object)
-
+print("=================================JSON END===============\n\n\n")
 for info in json_object['info']:
   print(info) #추천메뉴, 유사도, 추천 가게 수
 
